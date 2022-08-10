@@ -1,12 +1,11 @@
 import { useEffect, useState } from "react";
 import "./App.css";
-import Container from 'react-bootstrap/Container';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
-import NavDropdown from 'react-bootstrap/NavDropdown';
+import Container from "react-bootstrap/Container";
+import Nav from "react-bootstrap/Nav";
+import Navbar from "react-bootstrap/Navbar";
+import NavDropdown from "react-bootstrap/NavDropdown";
 import jwt_decoded from "jwt-decode";
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const [user, setUser] = useState({});
@@ -50,50 +49,49 @@ function App() {
         <div id="signInDiv"></div>
       </div>
 
-      <div id="main" className="" >
-      {Object.keys(user).length !== 0 && (
-        <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
-      )}
-      {user && (
-        <div>
-          <img alt="" src={user.picture}></img>
-          <h3>{user.name}</h3>
-          <Navbarmain />
-        </div>
-      )}
+      <div id="main" className="">
+        {Object.keys(user).length !== 0 && (
+          <>
+            <Navbarmain
+              hello={user.name}
+              img={user.picture}
+              out={(e) => handleSignOut(e)}
+            />
+         </>
+        )}
       </div>
     </div>
   );
 }
 
-function Navbarmain() {
-  return(
-    <Navbar bg="light" expand="lg">
-    <Container>
-      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
-      <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      <Navbar.Collapse id="basic-navbar-nav">
-        <Nav className="me-auto">
-          <Nav.Link href="#home">Home</Nav.Link>
-          <Nav.Link href="#link">Link</Nav.Link>
-          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
-            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.2">
-              Another action
-            </NavDropdown.Item>
-            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
-            <NavDropdown.Divider />
-            <NavDropdown.Item href="#action/3.4">
-              Separated link
-            </NavDropdown.Item>
-          </NavDropdown>
-        </Nav>
-      </Navbar.Collapse>
-    </Container>
-  </Navbar>
+function Navbarmain(props) {
+  return (
+    <Navbar className="bg-purple-600" expand="lg">
+      <Container>
+        <Navbar.Brand className="text-white text-l font-semibold">Painting</Navbar.Brand>
+        <div className="">
+        <Navbar.Toggle className="bg-white" aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse className="grow-0" id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <img
+              src={props.img}
+              alt="userimage"
+              className="rounded-full w-10 h-10 content-center smalls:invisible"
+            />
+            <NavDropdown title={props.hello} id="basic-nav-dropdown">
+              <NavDropdown.Item>Profile</NavDropdown.Item>
+              <NavDropdown.Item>DashBoard</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item onClick={props.out}>
+                Sign Out
+              </NavDropdown.Item>
+            </NavDropdown>
+          </Nav>
+        </Navbar.Collapse>
+        </div>
+      </Container>
+    </Navbar>
   );
 }
-
-
 
 export default App;
