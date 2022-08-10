@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import Container from 'react-bootstrap/Container';
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+import NavDropdown from 'react-bootstrap/NavDropdown';
 import jwt_decoded from "jwt-decode";
-import Form from "./Form";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 function App() {
   const [user, setUser] = useState({});
@@ -11,13 +16,12 @@ function App() {
     var userObject = jwt_decoded(response.credential);
     console.log(userObject);
     setUser(userObject);
-    document.getElementById("signInDiv").hidden = true;
+    document.getElementById("form").hidden = true;
   }
 
   function handleSignOut(event) {
     setUser({});
-
-    document.getElementById("signInDiv").hidden = false;
+    document.getElementById("form").hidden = false;
   }
 
   useEffect(() => {
@@ -42,8 +46,11 @@ function App() {
 
   return (
     <div className="App">
-      <h1 className="text-">SIGN UP / IN</h1>
-        <div className="" id="signInDiv"></div>
+      <div className="w-96 h-96 bg-white" id="form">
+        <div id="signInDiv"></div>
+      </div>
+
+      <div id="main" className="" >
       {Object.keys(user).length !== 0 && (
         <button onClick={(e) => handleSignOut(e)}>Sign Out</button>
       )}
@@ -51,12 +58,42 @@ function App() {
         <div>
           <img alt="" src={user.picture}></img>
           <h3>{user.name}</h3>
+          <Navbarmain />
         </div>
       )}
-
-      <Form />
+      </div>
     </div>
   );
 }
+
+function Navbarmain() {
+  return(
+    <Navbar bg="light" expand="lg">
+    <Container>
+      <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
+      <Navbar.Toggle aria-controls="basic-navbar-nav" />
+      <Navbar.Collapse id="basic-navbar-nav">
+        <Nav className="me-auto">
+          <Nav.Link href="#home">Home</Nav.Link>
+          <Nav.Link href="#link">Link</Nav.Link>
+          <NavDropdown title="Dropdown" id="basic-nav-dropdown">
+            <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.2">
+              Another action
+            </NavDropdown.Item>
+            <NavDropdown.Item href="#action/3.3">Something</NavDropdown.Item>
+            <NavDropdown.Divider />
+            <NavDropdown.Item href="#action/3.4">
+              Separated link
+            </NavDropdown.Item>
+          </NavDropdown>
+        </Nav>
+      </Navbar.Collapse>
+    </Container>
+  </Navbar>
+  );
+}
+
+
 
 export default App;
