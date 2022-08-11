@@ -3,6 +3,8 @@ import "./App.css";
 import jwt_decoded from "jwt-decode";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbarmain from "./Navbar";
+import Draw from "./Draw";
+
 
 function App() {
   const [user, setUser] = useState({});
@@ -41,7 +43,7 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
+    <div className="App max-w-full">
       <div className="w-96 h-96 bg-white" id="form">
         <div id="signInDiv"></div>
       </div>
@@ -54,6 +56,9 @@ function App() {
               img={user.picture}
               out={(e) => handleSignOut(e)}
             />
+            <p className="text-7xl text-center font-bold ">Welcome <span className="text-green-400"> {user.name} </span> !!</p>
+            <p className="text-4xl text-center text-white font-medium ">You Can Draw your Drawing</p>
+         <Draw />
          </>
         )}
       </div>
