@@ -6,6 +6,7 @@ module.exports = {
       screens: {
         'smalls': {max : '990px'}
       }
+      
     },
   },
   plugins: [],

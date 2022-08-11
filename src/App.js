@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import "./App.css";
 import jwt_decoded from "jwt-decode";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbarmain from "./Navbar";
@@ -36,17 +35,17 @@ function App() {
       size: "large",
       text: "continue_with",
       shape: "pill",
-      width: 300,
+      width: 900
     });
 
     google.accounts.id.prompt();
   }, []);
 
   return (
-    <div className="App max-w-full">
-      <div className="w-96 h-96 bg-white" id="form">
-      srsj
-        <div id="signInDiv"></div>
+    <div className="App max-w-full text-center">
+      <div className="mt-60" id="form">
+        <p className="text-white font-medium text-9xl">My Painter</p>
+        <div className="karo pt-10" id="signInDiv"></div>
       </div>
 
       <div id="main" className="">
